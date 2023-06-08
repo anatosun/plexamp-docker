@@ -9,7 +9,7 @@ services:
      container_name: plexamp 
      privileged: true
      network_mode: "host" 
-     image: ghcr.io/anatosun/plexamp:latest
+     image: ghcr.io/anatosun/plexamp:arm64v8
      volumes: 
         - /data/docker/plexamp/:/home/plexamp:rw 
     environment:
