@@ -24,7 +24,7 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: "Build dblpbibtex Image"
+      - name: "Build Plexamp Image"
         run: |
           docker build . --tag ghcr.io/${{github.actor}}/plexamp:latest
           docker push ghcr.io/${{github.actor}}/plexamp:latest
