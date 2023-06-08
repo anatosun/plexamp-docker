@@ -26,5 +26,5 @@ jobs:
 
       - name: "Build Plexamp Image"
         run: |
-          docker build . --tag ghcr.io/${{github.actor}}/plexamp:latest
-          docker push ghcr.io/${{github.actor}}/plexamp:latest
+          docker build -f Dockerfile-amd64 . --tag ghcr.io/${{github.actor}}/plexamp:amd64 
+          docker push ghcr.io/${{github.actor}}/plexamp:amd64
