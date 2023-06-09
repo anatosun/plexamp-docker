@@ -13,7 +13,7 @@ services:
      volumes: 
         - /data/docker/plexamp/:/home/plexamp:rw  # replace that with the appropriate host binding
     environment:
-        - PLEXAMP_PLAYER_NAME=claim-XXXXXXXXXX # get your claim at https://www.plex.tv/claim/
+        - PLEXAMP_CLAIM_TOKEN=claim-XXXXXXXXXX # get your claim at https://www.plex.tv/claim/
         - PLEXAMP_PLAYER_NAME=docker # replace this with your player name
     restart: unless-stopped
 ```
