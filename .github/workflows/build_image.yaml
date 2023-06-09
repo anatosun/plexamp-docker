@@ -26,5 +26,6 @@ jobs:
 
       - name: "Build Plexamp Image"
         run: |
+          docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{github.actor}}/plexamp:amd64 .
           docker push ghcr.io/${{github.actor}}/plexamp:amd64
