@@ -8,14 +8,16 @@ services:
    plexamp:
      container_name: plexamp 
      privileged: true
-     network_mode: "host" 
      image: ghcr.io/anatosun/plexamp:arm64v8
      devices:
         - "/dev/snd:/dev/snd"
      volumes: 
-        - /data/docker/plexamp/:/home/root/:rw  # replace that with the appropriate host binding
+        - ./config:/root/.local/share/Plexamp/Settings  # replace that with the appropriate host binding
      environment:
         - PLEXAMP_CLAIM_TOKEN=claim-XXXXXXXXXX # get your claim at https://www.plex.tv/claim/
         - PLEXAMP_PLAYER_NAME=docker # replace this with your player name
+     ports:
+        - 32500:32500
+        - 20000:20000
      restart: unless-stopped
 ```
