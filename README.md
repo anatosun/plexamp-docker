@@ -10,7 +10,8 @@ Here is a compose file to get you started. Be sure to get a [fresh plex-claim](h
 version: '3'
 services:
    plexamp:
-     container_name: plexamp 
+     container_name: plexamp
+     network_mode: host
      privileged: true
      image: ghcr.io/anatosun/plexamp:arm64v8
      devices:
@@ -20,8 +21,7 @@ services:
      environment:
         - PLEXAMP_CLAIM_TOKEN=claim-XXXXXXXXXX # get your claim at https://www.plex.tv/claim/
         - PLEXAMP_PLAYER_NAME=docker # replace this with your player name
-     ports:
-        - 32500:32500
-        - 20000:20000
      restart: unless-stopped
 ```
+
+You can open this player at http://[your-ip]:32500
