@@ -3,19 +3,30 @@ name: Deploy Images to GHCR
 on:
   push:
     branches:
-      - docker
       - main
+  schedule:
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
-  push-store-image:
+  check-version:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: "."
+
     steps:
-      - name: "Checkout GitHub Action"
-        uses: actions/checkout@main
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Compare versions
+        id: compare_versions
+        run: |
+          PREVIOUS_VERSION_JSON=`cat version.json`
+          CURRENT_VERSION_JSON=`curl -s https://plexamp.plex.tv/headless/version.json`
+
+          if [ "$PREVIOUS_VERSION_JSON" != "$CURRENT_VERSION_JSON" ]; then
+            echo "::set-output name=trigger_workflow::true"
+          else
+            echo "::set-output name=trigger_workflow::false"
+          fi
 
       - name: "Login to GitHub Container Registry"
         uses: docker/login-action@v1
@@ -24,18 +35,18 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: "Build arm64v8 Plexamp Image"
+      - name: Trigger workflow if versions are different
+        if: steps.compare_versions.outputs.trigger_workflow == 'true'
         run: |
+          echo "Versions are different. Updating version.json..."
+          echo "Triggering Docker Build"  
+          echo "Building ARM64v8 image"  
           docker buildx create --use
           docker buildx build --platform linux/arm64 -t ghcr.io/${{github.actor}}/plexamp:arm64v8 --load .
           docker push ghcr.io/${{github.actor}}/plexamp:arm64v8
-
-      - name: "Build arm32v7 Plexamp Image"
-        run: |
+          echo "Building ARM32v7 image"  
           docker buildx build --platform linux/arm/v7 -t ghcr.io/${{github.actor}}/plexamp:arm32v7 --load .
           docker push ghcr.io/${{github.actor}}/plexamp:arm32v7
-
-      - name: "Build amd64 Plexamp Image"
-        run: |
+          echo "Building AMD64 image"  
           docker buildx build --platform linux/amd64 -t ghcr.io/${{github.actor}}/plexamp:amd64 --load .
           docker push ghcr.io/${{github.actor}}/plexamp:amd64
