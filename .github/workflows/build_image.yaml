@@ -29,16 +29,16 @@ jobs:
           fi
 
       - name: "Login to GitHub Container Registry"
+        if: steps.compare_versions.outputs.trigger_workflow == 'true'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Trigger workflow if versions are different
+      - name: Building images if the remote version has changed
         if: steps.compare_versions.outputs.trigger_workflow == 'true'
         run: |
-          echo "Versions are different. Updating version.json..."
           echo "Triggering Docker Build"  
           echo "Building ARM64v8 image"  
           docker buildx create --use
@@ -50,3 +50,15 @@ jobs:
           echo "Building AMD64 image"  
           docker buildx build --platform linux/amd64 -t ghcr.io/${{github.actor}}/plexamp:amd64 --load .
           docker push ghcr.io/${{github.actor}}/plexamp:amd64
+
+      - name: Update local version if the remote version has changed
+        if: steps.compare_versions.outputs.trigger_workflow == 'true'
+        run: |
+          echo "Versions are different. Updating version.json..."
+          CURRENT_VERSION_JSON=`curl -s https://plexamp.plex.tv/headless/version.json`
+          CURRENT_VERSION=`echo $CURRENT_VERSION_JSON | jq -r .latestVersion`
+          echo $CURRENT_VERSION_JSON > version.json
+          git config --global user.name "Version updater"
+          git config --global user.email "edd933a9@duck.com"
+          git commit -am "upd: version bump to ${CURRENT_VERSION}"
+          git push
