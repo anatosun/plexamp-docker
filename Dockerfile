@@ -1,4 +1,4 @@
-FROM node:16-bullseye
+FROM node:20-bullseye
 
 
 RUN apt-get update && apt-get install -y -q --no-install-recommends \
