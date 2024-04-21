@@ -1,6 +1,6 @@
-# Plexamp Docker
+# Plexamp Headless Docker
 
-This repository allows building a docker image of [Plexamp](https://plexamp.com/) and also provides a pre-built image at `ghcr.io/anatosun/plexamp:arm64v8`.
+This repository allows building a docker image of [Plexamp headless](https://plexamp.com/) and also provides a pre-built image at `ghcr.io/anatosun/plexamp:arm64v8`.
 
 The architectures supported by this image are the following.
 
