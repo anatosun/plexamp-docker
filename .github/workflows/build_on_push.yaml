@@ -1,4 +1,4 @@
-name: Deploy Images to GHCR
+name: Deploy Images to GHCR when pushing to main branch
 
 on:
   push:
