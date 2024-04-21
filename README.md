@@ -15,7 +15,6 @@ The architectures supported by this image are:
 Here is a compose file to get you started. Be sure to get a [fresh plex-claim](https://www.plex.tv/claim).
 
 ```yaml
-version: "3"
 services:
   plexamp:
     container_name: plexamp
