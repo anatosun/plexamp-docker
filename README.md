@@ -1,6 +1,6 @@
 <p align="center"><img src="https://raw.githubusercontent.com/anatosun/plexamp-docker/main/assets/icon.svg"/></p>
 
-This repository allows building a docker image of [Plexamp headless](https://plexamp.com/) and also provides a pre-built image at `ghcr.io/anatosun/plexamp:arm64v8`.
+This repository provides a Dockerfile and pre-built images of [Plexamp headless](https://plexamp.com/).
 
 The architectures supported by this image are the following.
 
@@ -37,4 +37,4 @@ services:
 
 ## Remarks
 
-- Beware that the claim token is only valid for 4 minutes. If the initial pull/creation of the container takes more than that, the container will fail to start. In that case, get a new claim, edit the compose file, and recreate the container.
+- Beware that the claim token is only valid for four minutes. If the initial pull/creation of the container takes more than four minutes, the container will fail to start. In that case, get a new claim, edit the compose file, and recreate the container.
