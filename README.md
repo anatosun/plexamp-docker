@@ -2,13 +2,15 @@
 
 This repository allows building a docker image of [Plexamp](https://plexamp.com/) and also provides a pre-built image at `ghcr.io/anatosun/plexamp:arm64v8`.
 
-The architectures supported by this image are:
+The architectures supported by this image are the following.
 
-| Architecture | Available | Tag     |
-| :----------: | :-------: | ------- |
-|    x86-64    |    ✅     | amd64   |
-|    arm64     |    ✅     | arm64v8 |
-|    arm32     |    ✅     | arm32v7 |
+| Architecture | Available | Tag                     |
+| :----------: | :-------: | ----------------------- |
+|    x86-64    |    ✅     | amd64-\<version tag\>   |
+|    arm64     |    ✅     | arm64v8-\<version tag\> |
+|    arm32     |    ✅     | arm32v7-\<version tag\> |
+
+Omitting the \<version tag\> will pull the latest version.
 
 ## Compose file
 
