@@ -1,10 +1,18 @@
 # Plexamp Docker
 
-This repository allows building a docker image of [Plexamp](https://plexamp.com/). Since Plexamp 4.7.0, Plexamp reads the claim and the player name from environment variables. This makes it much easier to spawn a Docker image.
+This repository allows building a docker image of [Plexamp](https://plexamp.com/) and also provides a pre-built image at `ghcr.io/anatosun/plexamp:arm64v8`.
+
+The architectures supported by this image are:
+
+| Architecture | Available | Tag     |
+| :----------: | :-------: | ------- |
+|    x86-64    |    ✅     | amd64   |
+|    arm64     |    ✅     | arm64v8 |
+|    arm32     |    ✅     | arm32v7 |
 
 ## Compose file
 
-Here is a compose file to get you started. Be sure to get a [fresh plex-claim](https://www.plex.tv/claim). Beware that this token is only valid for 4 minutes. If the initial pull/creation of the container takes more than that, the container will fail to start. In that case, get a new claim and recreate the container.
+Here is a compose file to get you started. Be sure to get a [fresh plex-claim](https://www.plex.tv/claim).
 
 ```yaml
 version: "3"
@@ -25,3 +33,7 @@ services:
       - 20000:20000
     restart: unless-stopped
 ```
+
+## Remarks
+
+- Beware that the claim token is only valid for 4 minutes. If the initial pull/creation of the container takes more than that, the container will fail to start. In that case, get a new claim, edit the compose file, and recreate the container.
