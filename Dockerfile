@@ -1,4 +1,4 @@
-FROM node:21.7.2-bullseye-slim
+FROM node:20-bullseye-slim
 
 RUN apt update && apt install -y -q \
         jq \
