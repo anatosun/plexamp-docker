@@ -1,11 +1,15 @@
-FROM node:20-bullseye
+FROM node:20-bullseye-slim
 
+ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y -q --no-install-recommends \
+RUN apt update -y && apt install -y -q \
         jq \
         wget \
-        libasound2 
-ENV WORKDIR /home/root/
+        libasound2 \
+        bzip2 \
+        curl
+
+ENV WORKDIR /home/root
 RUN mkdir -p $WORKDIR
 WORKDIR $WORKDIR
 RUN wget -q "$(curl -s "https://plexamp.plex.tv/headless/version$1.json" | jq -r '.updateUrl')" -O plexamp.tar.bz2
