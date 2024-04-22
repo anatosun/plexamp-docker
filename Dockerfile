@@ -1,6 +1,8 @@
 FROM node:20-bullseye-slim
 
-RUN apt update && apt install -y -q \
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt update -y && apt install -y -q \
         jq \
         wget \
         libasound2 \
