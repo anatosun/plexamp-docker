@@ -38,3 +38,7 @@ services:
 ## Remarks
 
 - Beware that the claim token is only valid for four minutes. If the initial pull/creation of the container takes more than four minutes, the container will fail to start. In that case, get a new claim, edit the compose file, and recreate the container.
+
+## Trademark notice
+
+Plexamp is a trademark of Plex. This project is an unofficial Docker image and is not affiliated with, endorsed by, or sponsored by Plex.
