@@ -38,6 +38,7 @@ services:
 ## Remarks
 
 - Beware that the claim token is only valid for four minutes. If the initial pull/creation of the container takes more than four minutes, the container will fail to start. In that case, get a new claim, edit the compose file, and recreate the container.
+- If you encounter connection issues with your installation, you may try to change the `network_mode` to `host` by adding `network_mode: host` to the above `yaml` file and remove the port bindings.
 
 ## Trademark notice
 
