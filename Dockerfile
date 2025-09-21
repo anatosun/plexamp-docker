@@ -1,4 +1,4 @@
-FROM node:20-bullseye-slim
+FROM node:20-trixie-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
