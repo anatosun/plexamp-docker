@@ -45,10 +45,10 @@ jobs:
           docker push ghcr.io/${{github.actor}}/plexamp:arm64v8
           docker buildx build --platform linux/arm64 -t ghcr.io/${{github.actor}}/plexamp:arm64v8-${CURRENT_VERSION} --load .
           docker push ghcr.io/${{github.actor}}/plexamp:arm64v8-${CURRENT_VERSION}
-          echo "Building ARM32v7 image"  
-          docker buildx build --platform linux/arm/v7 -t ghcr.io/${{github.actor}}/plexamp:arm32v7 --load .
+          echo "Building ARM32v7 image"
+          docker buildx build --platform linux/arm/v7 -f Dockerfile.arm32v7 -t ghcr.io/${{github.actor}}/plexamp:arm32v7 --load .
           docker push ghcr.io/${{github.actor}}/plexamp:arm32v7
-          docker buildx build --platform linux/arm/v7 -t ghcr.io/${{github.actor}}/plexamp:arm32v7-${CURRENT_VERSION} --load .
+          docker buildx build --platform linux/arm/v7 -f Dockerfile.arm32v7 -t ghcr.io/${{github.actor}}/plexamp:arm32v7-${CURRENT_VERSION} --load .
           docker push ghcr.io/${{github.actor}}/plexamp:arm32v7-${CURRENT_VERSION}
           echo "Building AMD64 image"  
           docker buildx build --platform linux/amd64 -t ghcr.io/${{github.actor}}/plexamp:amd64 --load .
