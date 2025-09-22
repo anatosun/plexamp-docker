@@ -16,4 +16,4 @@ RUN wget -q "$(curl -s "https://plexamp.plex.tv/headless/version$1.json" | jq -r
 RUN tar xfj plexamp.tar.bz2
 ENV WORKDIR=$WORKDIR/plexamp
 WORKDIR $WORKDIR
-ENTRYPOINT ["node", "$WORKDIR/js/index.js"]
+ENTRYPOINT node $WORKDIR/js/index.js
