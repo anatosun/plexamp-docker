@@ -1,4 +1,4 @@
-FROM node:20-trixie-slim
+FROM node:20-bookworm-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
