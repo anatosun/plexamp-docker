@@ -6,11 +6,12 @@ The architectures supported by this image are the following.
 
 | Architecture | Available | Tag                     |
 | :----------: | :-------: | ----------------------- |
+|  Multi-arch  |    ✅     | latest, \<version tag\> |
 |    x86-64    |    ✅     | amd64-\<version tag\>   |
 |    arm64     |    ✅     | arm64v8-\<version tag\> |
 |    arm32     |    ✅     | arm32v7-\<version tag\> |
 
-Omitting the \<version tag\> will pull the latest version.
+The `latest` and version tags are multi-architecture manifests that automatically select the appropriate image for your platform.
 
 ## Compose file
 
@@ -21,7 +22,7 @@ services:
   plexamp:
     container_name: plexamp
     privileged: true
-    image: ghcr.io/anatosun/plexamp:arm64v8
+    image: ghcr.io/anatosun/plexamp:latest
     devices:
       - "/dev/snd:/dev/snd"
     volumes:
