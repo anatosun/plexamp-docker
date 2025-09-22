@@ -35,8 +35,17 @@ jobs:
           docker push ghcr.io/${{github.actor}}/plexamp:arm32v7
           docker buildx build --platform linux/arm/v7 -f Dockerfile.arm32v7 -t ghcr.io/${{github.actor}}/plexamp:arm32v7-${CURRENT_VERSION} --load .
           docker push ghcr.io/${{github.actor}}/plexamp:arm32v7-${CURRENT_VERSION}
-          echo "Building AMD64 image"  
+          echo "Building AMD64 image"
           docker buildx build --platform linux/amd64 -t ghcr.io/${{github.actor}}/plexamp:amd64 --load .
           docker push ghcr.io/${{github.actor}}/plexamp:amd64
           docker buildx build --platform linux/amd64 -t ghcr.io/${{github.actor}}/plexamp:amd64-${CURRENT_VERSION} --load .
           docker push ghcr.io/${{github.actor}}/plexamp:amd64-${CURRENT_VERSION}
+          echo "Creating multi-arch latest manifest"
+          docker buildx imagetools create -t ghcr.io/${{github.actor}}/plexamp:latest \
+            ghcr.io/${{github.actor}}/plexamp:amd64 \
+            ghcr.io/${{github.actor}}/plexamp:arm64v8 \
+            ghcr.io/${{github.actor}}/plexamp:arm32v7
+          docker buildx imagetools create -t ghcr.io/${{github.actor}}/plexamp:${CURRENT_VERSION} \
+            ghcr.io/${{github.actor}}/plexamp:amd64-${CURRENT_VERSION} \
+            ghcr.io/${{github.actor}}/plexamp:arm64v8-${CURRENT_VERSION} \
+            ghcr.io/${{github.actor}}/plexamp:arm32v7-${CURRENT_VERSION}
