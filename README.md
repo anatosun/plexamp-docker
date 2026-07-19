@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/anatosun/plexamp-docker/main/assets/icon.svg"/></p>
+<p align="center"><img src="assets/icon.svg" alt="Plexamp logo" width="136" height="98" /></p>
 
 This repository provides a Dockerfile and pre-built images of [Plexamp headless](https://plexamp.com/).
 
